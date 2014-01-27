@@ -1,0 +1,26 @@
+Keywords:
+	Africa
+	Ice Cream
+
+Name:
+	African Ice Cream Mongol!
+
+My countries (top left, following to right etc):
+	Ivorygal (top left)
+	Libgyptia
+	Congola (left mid)
+	Kenyopia (right mid)
+	Nambafrica (bottom)
+	Madagascar
+
+	World (black)
+
+Idea:
+	Make "world" produce ice cream every x seconds
+	Make each country consume africa each x seconds
+	Make shipping from world to africa and then decide where to place it
+	Unlock new countries by purchasing ice cream rights / bribing army
+	Possible to purchase new factories in world to produce more ice creams
+
+Expansion:
+	Possible to advertise in countries to increase demand
