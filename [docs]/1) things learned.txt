@@ -1,2 +1,7 @@
 Photoshop:
 	To create a border around stuff - edit/stroke
+
+Unity:
+	To load a texture during runtime - Create a folder called "Resources" Assets/Resources - place file there and then use "Resources.Load<Texture2D>("IceCreamIcon");" WITHOUT extension.
+
+	Trying to draw a texture on top of a sprite found in scene - only got this.transform.position - can't seem to get sprite rect somehow?

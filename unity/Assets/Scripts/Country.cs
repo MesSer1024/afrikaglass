@@ -3,68 +3,90 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Afrika;
+using UnityEngine;
 
-namespace Assets.Scripts
+namespace Afrika
 {
     class Country
     {
-        private const int WAREHOUSE_SIZE = 125;
-        private int _warehouseMultiplier = 0;
-
-        public bool isAvailable { get; private set; }
-        public int icecreams { get; private set; }
+        private const int WAREHOUSE_SIZE = 165;
+        public CountryID CountryID {
+            get { return _countryID; }
+        }
+        public CountryComp View { get; set; }
+        public bool isPurchased { get; private set; }
+        public bool isSelected { get; set; }
+        public int icecreams { get; set; }
         public int warehouseSize { get; private set; }
 
-        private CountryClickedMessage.CountryID _countryID;
+        private CountryID _countryID;
+        private int _warehouseMultiplier = 0;
 
-        public Country(CountryClickedMessage.CountryID countryID)
-        {
+        private float _chanceToEatIcecream;
+        private int _purchasePrice;
+
+        public Country(CountryID countryID) {
             _countryID = countryID;
             icecreams = 0;
             warehouseSize = 0;
-        }
 
-        public int getPurchasePrice()
-        {
-            int price = int.MaxValue;
-            switch (_countryID)
-            {
-                case CountryClickedMessage.CountryID.Country0_Ivorygal:
-                    price = 75000;
+            switch (_countryID) {
+                case CountryID.Country0_Ivorygal:
+                    _purchasePrice = 75000;
+                    _chanceToEatIcecream = GameData.SellChance;
                     break;
-                case CountryClickedMessage.CountryID.Country1_Libgyptia:
-                    price = 75001;
+                case CountryID.Country1_Libgyptia:
+                    _purchasePrice = 75001;
+                    _chanceToEatIcecream = GameData.SellChance;
                     break;
-                case CountryClickedMessage.CountryID.Country2_Congola:
-                    price = 75002;
+                case CountryID.Country2_Congola:
+                    _purchasePrice = 75002;
+                    _chanceToEatIcecream = GameData.SellChance;
                     break;
-                case CountryClickedMessage.CountryID.Country3_Kenyopia:
-                    price = 75003;
+                case CountryID.Country3_Kenyopia:
+                    _purchasePrice = 75003;
+                    _chanceToEatIcecream = GameData.SellChance;
                     break;
-                case CountryClickedMessage.CountryID.Country4_Nambafrica:
-                    price = 75004;
+                case CountryID.Country4_Nambafrica:
+                    _purchasePrice = 75004;
+                    _chanceToEatIcecream = GameData.SellChance;
                     break;
-                case CountryClickedMessage.CountryID.Country5_Madagascar:
-                    price = 75005;
+                case CountryID.Country5_Madagascar:
+                    _purchasePrice = 75005;
+                    _chanceToEatIcecream = GameData.SellChance;
+                    break;
+                default:
+                    _purchasePrice = int.MaxValue;
+                    _chanceToEatIcecream = 0.0f;
                     break;
             }
-            return price;
         }
 
-        public void purchase()
-        {
-            if (isAvailable) throw new Exception("Trying to purchase allready purchased country " + _countryID.ToString());
+        public int getPurchasePrice() {
+            return _purchasePrice;
+        }
 
-            isAvailable = true;
+        public void purchase() {
+            if (isPurchased)
+                throw new Exception("Trying to purchase already purchased country : " + _countryID.ToString());
+
+            isPurchased = true;
             increaseWarehouseLimit();
+            Debug.Log("purchased country: " + _countryID.ToString());
         }
 
-        public void increaseWarehouseLimit()
-        {
+        public void increaseWarehouseLimit() {
             _warehouseMultiplier++;
             warehouseSize = WAREHOUSE_SIZE * _warehouseMultiplier;
         }
 
-        public CountryComp View { get; set; }
+        public void update() {
+            if (isPurchased) {
+                if (icecreams > 0 && UnityEngine.Random.value < _chanceToEatIcecream) {
+                    icecreams--;
+                    MessageManager.QueueMessage(new IcecreamPurchasedMessage(_countryID));
+                }
+            }
+        }
     }
 }
