@@ -22,5 +22,16 @@ Idea:
 	Unlock new countries by purchasing ice cream rights / bribing army
 	Possible to purchase new factories in world to produce more ice creams
 
+Game end:
+	How many ice creams can you sell in a year?
+	1 month = 5 minutes	
+	12 months = 60 minutes
+	possible to double time
+Score:
+	money left * 1
+	ice creams sold * 4 (will probably need some kind of other multiplier?)
+	each country unlocked = money_needed
+	money spent * 0.75
+
 Expansion:
 	Possible to advertise in countries to increase demand

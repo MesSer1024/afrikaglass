@@ -4,11 +4,11 @@ using Afrika;
 using System;
 
 public class CountryComp : MonoBehaviour {
-    private CountryClickedMessage.CountryID _countryId;
+    public CountryClickedMessage.CountryID countryId { get; set; }
 	
     // Use this for initialization
 	void Start () {
-        _countryId = getCountryID(this.name);
+        countryId = getCountryID(this.name);
 	}
 	
 	// Update is called once per frame
@@ -16,7 +16,7 @@ public class CountryComp : MonoBehaviour {
 	}
 
     void OnMouseDown() {
-        MessageManager.QueueMessage(new CountryClickedMessage(_countryId));
+        MessageManager.QueueMessage(new CountryClickedMessage(countryId));
         Debug.Log("mouseDown on: " + this.name);
     }
 

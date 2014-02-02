@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Afrika
 {
-	class CountryClickedMessage : IMessage
+	public class CountryClickedMessage : IMessage
 	{
         public enum CountryID
         {
